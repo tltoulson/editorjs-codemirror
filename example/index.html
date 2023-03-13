@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Test of CodeMirror</title>
+
+        <style>
+            body,
+            html {
+                margin: 0;
+            }
+
+            #editorjs {
+                width: 800px;
+                margin-top: 10px;
+            }
+
+            #editorjsReadOnly {
+                width: 800px;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="editorjs"></div>
+        <div id="editorjsReadOnly"></div>
+    </body>
+
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="../dist/bundle.js"></script>
+    <script>
+        const editor = new EditorJS({
+          autofocus: true,
+          data: {},
+          placeholder: 'CodeMirror Tool Test',
+          holder: 'editorjs',
+          tools: {
+            codemirror: {
+              class: CodeMirrorTool,              
+            },
+          },
+        });
+
+        const editorReadOnly = new EditorJS({
+          autofocus: true,
+          data: {},
+          placeholder: 'CodeMirror Tool Test',
+          holder: 'editorjsReadOnly',
+          tools: {
+            codemirror: {
+              class: CodeMirrorTool,              
+            },
+          },
+          readOnly: true,
+          data: {
+            time: 1678734595511,
+            blocks: [
+                {
+                    id: 'mhTl6ghSkV',
+                    type: 'codemirror',
+                    data: {
+                        'code': 'var gr = new GlideRecord("test");',
+                        'language': 'JavaScript',
+                    }
+                }
+            ],
+          }
+        });
+    </script>
+</html>
