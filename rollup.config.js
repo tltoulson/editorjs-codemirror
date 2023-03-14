@@ -4,7 +4,7 @@ export default [
     {
         input: './src/index.js',
         output: {
-            file: './dist/bundle.js',
+            file: './dist/index.mjs',
             format: 'es',
             name: 'CodeMirrorTool'
         },
@@ -13,7 +13,7 @@ export default [
     {
         input: './src/index.js',
         output: {
-            file: './example/bundle.js',
+            file: './dist/index.js',
             format: 'umd',
             name: 'CodeMirrorTool'
         },

@@ -1,14 +1,18 @@
 {
-  "name": "editorjs-codemirror",
-  "version": "0.0.1",
-  "description": "",
-  "main": "dist/bundle.js",
+  "name": "@tltoulson/editorjs-codemirror",
+  "version": "0.1.0",
+  "description": "EditorJS Tool that allows adding a block with syntax highlighting powered by CodeMirror 6 with a language picker",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w"
   },
-  "author": "",
-  "license": "ISC",
+  "engines": {
+		"node": ">=18"
+	},
+  "author": "Travis Toulson",
+  "license": "MIT",
   "dependencies": {
     "@codemirror/commands": "^6.2.2",
     "@codemirror/lang-css": "^6.1.1",
