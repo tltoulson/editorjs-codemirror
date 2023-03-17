@@ -71,8 +71,7 @@ export default class CodeMirrorTool {
     constructor({ data, config, api, readOnly }) {
         this.api = api;
         this.readOnly = readOnly;
-        this.defaultLanguage = 'None';
-        this.defaultLanguageExtension = [];
+        this.selectedLanguage = data.language || 'None';
 
         this.nodes = {
             holder: null,
@@ -128,7 +127,7 @@ export default class CodeMirrorTool {
         // Setup CodeMirror instance
         var codeMirrorExtensions = [
             basicSetup, 
-            language.of(this.defaultLanguageExtension), 
+            language.of(this._getLanguageExtension()), 
             theme.of(oneDark),
             EditorView.theme(themeOverrides),
             domEventHandlers,
@@ -171,7 +170,7 @@ export default class CodeMirrorTool {
             option.value = language.name;
             option.text = language.name;
 
-            if (language.name == this.defaultLanguage) {
+            if (language.name == this.selectedLanguage) {
                 option.selected = true;
             }
 
@@ -181,20 +180,12 @@ export default class CodeMirrorTool {
         var self = this;
         languagePicker.addEventListener('change', function(event) {
             // Update Language
-            var selectedLang = event.target.value;
-            var selectedLangExtension;
-
-            // There are more efficient ways of handling this
-            // but this will work for now since it's a short list
-            self.languages.forEach(function(language) {
-                if (language.name == selectedLang) {
-                    selectedLangExtension = language.extension;
-                }
-            });
+            this.selectedLanguage = event.target.value;
+            var selectedLangExtension = this._getLanguageExtension();
 
             if (selectedLangExtension) {
                 self.codeMirrorInstance.dispatch({
-                    effects: language.reconfigure(getLanguageFromExtension(selectedLangExtension)),
+                    effects: language.reconfigure(selectedLangExtension),
                 });
             }
             else {
@@ -304,6 +295,19 @@ export default class CodeMirrorTool {
          * Prevent editor.js tab handler
          */
         event.stopPropagation();
+    }
+
+    _getLanguageExtension() {
+        var selectedLanguage = this.languages.find(function(language) {
+            return language.name == this.selectedLanguage;
+        }, this);
+
+        if (typeof selectedLanguage.extension == 'function') {
+            return selectedLanguage.extension();
+        }
+        else {
+            return selectedLanguage.extension;
+        }
     }
 }
 
