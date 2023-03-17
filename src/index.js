@@ -181,7 +181,7 @@ export default class CodeMirrorTool {
         languagePicker.addEventListener('change', function(event) {
             // Update Language
             this.selectedLanguage = event.target.value;
-            var selectedLangExtension = this._getLanguageExtension();
+            var selectedLangExtension = self._getLanguageExtension();
 
             if (selectedLangExtension) {
                 self.codeMirrorInstance.dispatch({
@@ -308,14 +308,5 @@ export default class CodeMirrorTool {
         else {
             return selectedLanguage.extension;
         }
-    }
-}
-
-function getLanguageFromExtension(extension) {
-    if (typeof extension == 'function') {
-        return extension();
-    }
-    else {
-        return extension;
     }
 }

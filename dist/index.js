@@ -29449,7 +29449,7 @@
           languagePicker.addEventListener('change', function(event) {
               // Update Language
               this.selectedLanguage = event.target.value;
-              var selectedLangExtension = this._getLanguageExtension();
+              var selectedLangExtension = self._getLanguageExtension();
 
               if (selectedLangExtension) {
                   self.codeMirrorInstance.dispatch({
