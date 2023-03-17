@@ -180,7 +180,7 @@ export default class CodeMirrorTool {
         var self = this;
         languagePicker.addEventListener('change', function(event) {
             // Update Language
-            this.selectedLanguage = event.target.value;
+            self.selectedLanguage = event.target.value;
             var selectedLangExtension = self._getLanguageExtension();
 
             if (selectedLangExtension) {
